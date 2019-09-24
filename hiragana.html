@@ -1,0 +1,316 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link href="style.css" rel="stylesheet">
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+            ev.dataTransfer.setData("target", ev.target.attributes['data-target'].value);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            var target = ev.dataTransfer.getData("target");
+            console.log(data);
+            console.log(target);
+            if (ev.target.id == target) {
+                ev.target.appendChild(document.getElementById(data));
+                count += 1;
+                update_text();
+                if (count == 46) {
+                    stop_timer();
+                    document.getElementById('finished').hidden = false;
+                }
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <div id="header">
+        <h1>Hiragana Timer</h1>
+        <p>Drag the hiragana next to the pronounciation as fast as possible.</p>
+    </div>
+    <div id="answers">
+        <p data-target="a_target" draggable="true" ondragstart="drag(event)" id="a" class="japanese">あ</p>
+        <p data-target="i_target" draggable="true" ondragstart="drag(event)" id="i" class="japanese">い</p>
+        <p data-target="u_target" draggable="true" ondragstart="drag(event)" id="u" class="japanese">う</p>
+        <p data-target="e_target" draggable="true" ondragstart="drag(event)" id="e" class="japanese">え</p>
+        <p data-target="o_target" draggable="true" ondragstart="drag(event)" id="o" class="japanese">お</p>
+        <p data-target="ka_target" draggable="true" ondragstart="drag(event)" id="ka" class="japanese">か</p>
+        <p data-target="ki_target" draggable="true" ondragstart="drag(event)" id="ki" class="japanese">き</p>
+        <p data-target="ku_target" draggable="true" ondragstart="drag(event)" id="ku" class="japanese">く</p>
+        <p data-target="ke_target" draggable="true" ondragstart="drag(event)" id="ke" class="japanese">け</p>
+        <p data-target="ko_target" draggable="true" ondragstart="drag(event)" id="ko" class="japanese">こ</p>
+        <p data-target="sa_target" draggable="true" ondragstart="drag(event)" id="sa" class="japanese">さ</p>
+        <p data-target="shi_target" draggable="true" ondragstart="drag(event)" id="shi" class="japanese">し</p>
+        <p data-target="su_target" draggable="true" ondragstart="drag(event)" id="su" class="japanese">す</p>
+        <p data-target="se_target" draggable="true" ondragstart="drag(event)" id="se" class="japanese">せ</p>
+        <p data-target="so_target" draggable="true" ondragstart="drag(event)" id="so" class="japanese">そ</p>
+        <p data-target="ta_target" draggable="true" ondragstart="drag(event)" id="ta" class="japanese">た</p>
+        <p data-target="chi_target" draggable="true" ondragstart="drag(event)" id="chi" class="japanese">ち</p>
+        <p data-target="tsu_target" draggable="true" ondragstart="drag(event)" id="tsu" class="japanese">つ</p>
+        <p data-target="te_target" draggable="true" ondragstart="drag(event)" id="te" class="japanese">て</p>
+        <p data-target="to_target" draggable="true" ondragstart="drag(event)" id="to" class="japanese">と</p>
+        <p data-target="na_target" draggable="true" ondragstart="drag(event)" id="na" class="japanese">な</p>
+        <p data-target="ni_target" draggable="true" ondragstart="drag(event)" id="ni" class="japanese">に</p>
+        <p data-target="nu_target" draggable="true" ondragstart="drag(event)" id="nu" class="japanese">ぬ</p>
+        <p data-target="ne_target" draggable="true" ondragstart="drag(event)" id="ne" class="japanese">ね</p>
+        <p data-target="no_target" draggable="true" ondragstart="drag(event)" id="no" class="japanese">の</p>
+        <p data-target="ha_target" draggable="true" ondragstart="drag(event)" id="ha" class="japanese">は</p>
+        <p data-target="hi_target" draggable="true" ondragstart="drag(event)" id="hi" class="japanese">ひ</p>
+        <p data-target="fu_target" draggable="true" ondragstart="drag(event)" id="fu" class="japanese">ふ</p>
+        <p data-target="he_target" draggable="true" ondragstart="drag(event)" id="he" class="japanese">へ</p>
+        <p data-target="ho_target" draggable="true" ondragstart="drag(event)" id="ho" class="japanese">ほ</p>
+        <p data-target="ma_target" draggable="true" ondragstart="drag(event)" id="ma" class="japanese">ま</p>
+        <p data-target="mi_target" draggable="true" ondragstart="drag(event)" id="mi" class="japanese">み</p>
+        <p data-target="mu_target" draggable="true" ondragstart="drag(event)" id="mu" class="japanese">む</p>
+        <p data-target="me_target" draggable="true" ondragstart="drag(event)" id="me" class="japanese">め</p>
+        <p data-target="mo_target" draggable="true" ondragstart="drag(event)" id="mo" class="japanese">も</p>
+        <p data-target="ya_target" draggable="true" ondragstart="drag(event)" id="ya" class="japanese">や</p>
+        <p data-target="yu_target" draggable="true" ondragstart="drag(event)" id="yu" class="japanese">ゆ</p>
+        <p data-target="yo_target" draggable="true" ondragstart="drag(event)" id="yo" class="japanese">よ</p>
+        <p data-target="ra_target" draggable="true" ondragstart="drag(event)" id="ra" class="japanese">ら</p>
+        <p data-target="ri_target" draggable="true" ondragstart="drag(event)" id="ri" class="japanese">り</p>
+        <p data-target="ru_target" draggable="true" ondragstart="drag(event)" id="ru" class="japanese">る</p>
+        <p data-target="re_target" draggable="true" ondragstart="drag(event)" id="re" class="japanese">れ</p>
+        <p data-target="ro_target" draggable="true" ondragstart="drag(event)" id="ro" class="japanese">ろ</p>
+        <p data-target="wa_target" draggable="true" ondragstart="drag(event)" id="wa" class="japanese">わ</p>
+        <p data-target="wo_target" draggable="true" ondragstart="drag(event)" id="wo" class="japanese">を</p>
+        <p data-target="n_target" draggable="true" ondragstart="drag(event)" id="n" class="japanese">ん</p>
+    </div>
+    <div id="questions">
+        <div class="row">
+            <div class="container">
+                <div class="question">wa</div>
+                <div id="wa_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container" style="height: 47px">
+            </div>
+            <div class="container">
+                <div class="question">wo</div>
+                <div id="wo_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container" style="height: 47px">
+            </div>
+            <div class="container">
+                <div class="question">n</div>
+                <div id="n_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="question">ra</div>
+                <div id="ra_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">ri</div>
+                <div id="ri_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">ru</div>
+                <div id="ru_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">re</div>
+                <div id="re_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">ro</div>
+                <div id="ro_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="question">ya</div>
+                <div id="ya_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container" style="height: 47px">
+            </div>
+            <div class="container">
+                <div class="question">yu</div>
+                <div id="yu_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container" style="height: 47px">
+            </div>
+            <div class="container">
+                <div class="question">yo</div>
+                <div id="yo_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="question">ma</div>
+                <div id="ma_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">mi</div>
+                <div id="mi_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">mu</div>
+                <div id="mu_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">me</div>
+                <div id="me_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">mo</div>
+                <div id="mo_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="question">ha</div>
+                <div id="ha_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">hi</div>
+                <div id="hi_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">fu</div>
+                <div id="fu_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">he</div>
+                <div id="he_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">ho</div>
+                <div id="ho_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="question">na</div>
+                <div id="na_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">ni</div>
+                <div id="ni_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">nu</div>
+                <div id="nu_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">ne</div>
+                <div id="ne_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">no</div>
+                <div id="no_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="question">ta</div>
+                <div id="ta_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">chi</div>
+                <div id="chi_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">tsu</div>
+                <div id="tsu_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">te</div>
+                <div id="te_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">to</div>
+                <div id="to_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="question">sa</div>
+                <div id="sa_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">shi</div>
+                <div id="shi_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">su</div>
+                <div id="su_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">se</div>
+                <div id="se_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">so</div>
+                <div id="so_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="question">ka</div>
+                <div id="ka_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">ki</div>
+                <div id="ki_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">ku</div>
+                <div id="ku_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">ke</div>
+                <div id="ke_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">ko</div>
+                <div id="ko_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="question">a</div>
+                <div id="a_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">i</div>
+                <div id="i_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">u</div>
+                <div id="u_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">e</div>
+                <div id="e_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+            <div class="container">
+                <div class="question">o</div>
+                <div id="o_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
+            </div>
+        </div>
+    </div>
+    <div class="timer">
+        <h2 id="timer">00:00:00</h2>
+        <div id="count">0</div>
+        <input id="reset" type="button" value="Reset" style="font-size: 20px;" onclick="reset">
+    </div>
+    <div id="finished" hidden=true>
+        <div>よくできました!</div>
+    </div>
+    <script src="timer.js"></script>
+</body>
+
+</html>
