@@ -25,8 +25,6 @@ function timer() {
     t = setTimeout(add, 1000);
 }
 
-timer()
-
 function stop_timer() {
     clearTimeout(t);
 }
@@ -45,7 +43,7 @@ document.getElementById('reset').onclick = function () {
     update_text()
     document.getElementById('finished').hidden = true;
     shuffle()
-    timer()
+    started = false;
 }
 
 function shuffle() {

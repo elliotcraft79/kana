@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <link href="style.css" rel="stylesheet">
     <script>
+        var started = false;
         function allowDrop(ev) {
             ev.preventDefault();
         }
@@ -13,6 +14,10 @@
         function drag(ev) {
             ev.dataTransfer.setData("text", ev.target.id);
             ev.dataTransfer.setData("target", ev.target.attributes['data-target'].value);
+            if (started == false) {
+                timer();
+                started = true;
+            }
         }
 
         function drop(ev) {
@@ -22,6 +27,8 @@
             console.log(data);
             console.log(target);
             if (ev.target.id == target) {
+                ev.target.style.backgroundColor = "white";
+                ev.target.style.borderColor = "white";
                 ev.target.appendChild(document.getElementById(data));
                 count += 1;
                 update_text();
@@ -94,14 +101,12 @@
                 <div class="question">wa</div>
                 <div id="wa_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
             </div>
-            <div class="container" style="height: 47px">
-            </div>
+            <div class="container spacer"></div>
             <div class="container">
                 <div class="question">wo</div>
                 <div id="wo_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
             </div>
-            <div class="container" style="height: 47px">
-            </div>
+            <div class="container spacer"></div>
             <div class="container">
                 <div class="question">n</div>
                 <div id="n_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
@@ -134,14 +139,12 @@
                 <div class="question">ya</div>
                 <div id="ya_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
             </div>
-            <div class="container" style="height: 47px">
-            </div>
+            <div class="container spacer"></div>
             <div class="container">
                 <div class="question">yu</div>
                 <div id="yu_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
             </div>
-            <div class="container" style="height: 47px">
-            </div>
+            <div class="container spacer"></div>
             <div class="container">
                 <div class="question">yo</div>
                 <div id="yo_target" ondrop="drop(event)" ondragover="allowDrop(event)" class="box answer"></div>
