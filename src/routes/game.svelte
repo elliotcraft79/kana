@@ -6,7 +6,9 @@
     let started = false;
     let reset = false;
 </script>
-<Question on:message={(event) => console.log(event.detail.target)} question='ha'/>
+<Question question='ha'/>
+<Question question='e'/>
+<Answer answer='e' question='e'/>
 <Answer/>
 <Timer {started} {reset}/>
 <button on:click={() => {started = 1}}>

@@ -1,8 +1,9 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+    import {dndzone} from "svelte-dnd-action";
 
     export let answer = 'は';
-    export let target = 'ha_target';
+    export let question = 'ha';
 
     const dispatch = createEventDispatcher();
 
@@ -24,7 +25,9 @@
     line-height: 10px;
     user-select: none;
     text-align: center;
+    cursor: grab;
 }
 </style>
-
-<div draggable="true" on:dragstart={onDragStart} class="japanese">{answer}</div>
+<div use:dndzone={{items:[{id:1}], type:question, dropFromOthersDisabled:true}}>
+    <div class="japanese">{answer}</div>
+</div>

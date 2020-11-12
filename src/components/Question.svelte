@@ -1,6 +1,6 @@
 <script>
-    // todo: replace dom events with svelte-dnd-action (use types to restrict items)
     import { createEventDispatcher } from 'svelte';
+    import {dndzone} from "svelte-dnd-action";
 
     export let question = 'a';
 
@@ -10,6 +10,12 @@
         event.preventDefault();
         let target = event.dataTransfer.getData("target");
         dispatch('message', {target: target});
+
+        if (question == target) {
+            event.target.style.backgroundColor = "white";
+            event.target.style.borderColor = "white";
+            event.target.appendChild(document.getElementById(data));
+        }
     }
 </script>
 
@@ -39,5 +45,5 @@
 
 <div class = "container">
     <div class="question">{question}</div>
-    <div on:drop={handleDrop} on:dragover={(event) => {event.preventDefault()}} class="box"></div>
+    <div use:dndzone={{items: [], dragDisabled: true, type: question}} class="box"></div>
 </div>
