@@ -1,5 +1,5 @@
 <script>
-    import {onDestroy, tick} from 'svelte';
+    import {onDestroy} from 'svelte';
 
     export let started = false;
     export let reset = false;
@@ -27,5 +27,21 @@
         seconds = time % 60;
 	}
 </script>
+<style>
 
-<h2>{padWithZeroes(minutes)}:{padWithZeroes(seconds)}</h2>
+.timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 15%;
+    position: relative;
+    top: 50px;
+    left: 0%;
+    font-family: 'Roboto';
+    font-size: 35px;
+    user-select: none;
+}
+</style>
+
+<h2 class="timer">{padWithZeroes(minutes)}:{padWithZeroes(seconds)}</h2>
