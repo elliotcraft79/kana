@@ -1,6 +1,5 @@
 <script>
     import { createEventDispatcher } from 'svelte';
-    import {dndzone} from "svelte-dnd-action";
 
     export let question = 'a';
 
@@ -9,13 +8,15 @@
     function handleDrop(event) {
         event.preventDefault();
         let target = event.dataTransfer.getData("target");
-        dispatch('message', {target: target});
+        let questionElement = event.dataTransfer.getData("questionElement");
 
         if (question == target) {
             event.target.style.backgroundColor = "white";
             event.target.style.borderColor = "white";
-            event.target.appendChild(document.getElementById(data));
+            event.target.appendChild(document.getElementById(questionElement));
+            dispatch('message', {correct: true});
         }
+        else dispatch('message', {correct: false});
     }
 </script>
 
@@ -34,7 +35,7 @@
     font-size: 35px;
     font-family: 'Source Sans Pro';
     user-select: none;
-    /*color: white;*/
+    color: white;
 }
 .container {
     width: 110px;
@@ -42,8 +43,11 @@
     overflow: hidden;
 }
 </style>
-
-<div class = "container">
+{#if question != 'spacer'}
+<div class="container">
     <div class="question">{question}</div>
-    <div use:dndzone={{items: [], dragDisabled: true, type: question}} class="box"></div>
+    <div on:drop={handleDrop} on:dragover={event => event.preventDefault()} class="box"></div>
 </div>
+{:else}
+    <div style="height:50px"></div>
+{/if}
