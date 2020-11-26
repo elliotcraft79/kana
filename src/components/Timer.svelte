@@ -3,6 +3,8 @@
 
     export let started = false;
     export let reset = false;
+    export let correct = 0;
+    export let wrong = 0;
 
     let time = 0;
 
@@ -44,4 +46,9 @@
 }
 </style>
 
-<h2 class="timer">{padWithZeroes(minutes)}:{padWithZeroes(seconds)}</h2>
+<h2 class="timer" on:click>
+    {padWithZeroes(minutes)}:{padWithZeroes(seconds)}&nbsp;
+    <div style="color:green;">{correct}</div>&nbsp;
+    <div style="color:red;">{wrong}</div>&nbsp;
+    <button on:click >Reset</button>
+</h2>

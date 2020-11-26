@@ -1,8 +1,10 @@
 <script>
+    // import the components
 	import Timer from '../components/Timer.svelte';
 	import Question from '../components/Question.svelte';
     import Answer from '../components/Answer.svelte';
     import {onMount} from 'svelte';
+
     let started = false;
     let reset = false;
     let correct = 0;
@@ -60,35 +62,50 @@
         {question: 'n', answer:'ん'},]
     ];
 
+    // starts the timer when a answer is dragged
     function handleAnswerMessage(event) {
         started = true;
     }
 
+    // runs whenever a answer is dragged into a question
+    // checks if it is right or wrong and stops the game when all of them are correct
     function handleQuestionMessage(event) {
-        if (event.detail.correct) correct++;
+        if (event.detail.correct) correct++; else wrong++;
         if (correct == 46) {
             started = false;
         }
     }
 
+    // shuffles all of the answers
     function shuffle() {
+        // get all of the answer elements
         let answerElements = document.getElementsByClassName("japanese");
-        let answersElement = document.getElementById("answers");
+        // get the answer container
+        let answerContainer = document.getElementById('answers');
+        // move all the answers into the answer container
+        for (let answer of answerElements) {
+            answerContainer.appendChild(answer);
+        }
+        // shuffle them around
         for (let i = answerElements.length; i >= 0; i--) {
-            let element = answerElements[Math.random() * i | 0];
-            answersElement.appendChild(element);
+            var elem = answerElements[Math.random() * i | 0];
+            answerContainer.appendChild(elem);
         }
     }
 
     onMount(async () => shuffle());
 
+    // resets the game
     function resetGame() {
         started = false;
         reset = true;
+        correct = 0;
+        wrong = 0;
         setTimeout(() => {reset = false}, 1000);
-        shuffle()
+        shuffle();
     }
 </script>
+
 <style>
 #answers {
     display: inline-grid;
@@ -138,11 +155,15 @@
     }
 }
 </style>
+
+<!-- create all of the answers -->
 <div id="answers">
     {#each questions.flat() as {question, answer}}
         <Answer {question} {answer} on:message={handleAnswerMessage}/>
     {/each}
 </div>
+
+<!-- create all of the questions -->
 <div id="questions">
     {#each questions.reverse() as row}
         <div class="row">
@@ -152,7 +173,10 @@
         </div>
     {/each}
 </div>
-<Timer {started} {reset}/>
+
+<Timer {started} {reset} {correct} {wrong} on:click={resetGame}/>
+
+<!-- display congratulatory message if game complete -->
 {#if correct == 46}
     <div id="finished">よくできました!</div>
 {/if}

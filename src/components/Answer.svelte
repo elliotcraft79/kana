@@ -1,6 +1,7 @@
 <script>
     import { createEventDispatcher } from 'svelte';
     // from https://attacomsian.com/blog/javascript-generate-random-string
+    // generates a random string
     const randomString = (length = 8) => {
         return Math.random().toString(16).substr(2, length);
     };
